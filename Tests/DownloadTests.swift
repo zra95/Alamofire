@@ -35,18 +35,18 @@ class DownloadResponseTestCase: BaseTestCase {
     func testDownloadRequest() {
         // Given
         let numberOfLines = 100
-        let URL = "http://httpbin.org/stream/\(numberOfLines)"
+        let URLString = "http://httpbin.org/stream/\(numberOfLines)"
 
         let destination = Alamofire.Request.suggestedDownloadDestination(directory: searchPathDirectory, domain: searchPathDomain)
 
-        let expectation = expectationWithDescription(URL)
+        let expectation = expectationWithDescription("Download request should download data to file: \(URLString)")
 
         var request: NSURLRequest?
         var response: NSHTTPURLResponse?
         var error: NSError?
 
         // When
-        Alamofire.download(.GET, URL, destination)
+        Alamofire.download(.GET, URLString, destination)
             .response { responseRequest, responseResponse, _, responseError in
                 request = responseRequest
                 response = responseResponse
